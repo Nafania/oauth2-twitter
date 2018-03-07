@@ -44,7 +44,7 @@ class Twitter extends AbstractProvider
      */
     public function getBaseAuthorizationUrl()
     {
-        return $this->apiDomain.'/oauth/authorize';
+        return $this->apiDomain . '/oauth/authorize';
     }
 
     /**
@@ -56,7 +56,7 @@ class Twitter extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params)
     {
-        return $this->apiDomain.'/oauth/access_token';
+        return $this->apiDomain . '/oauth2/token';
     }
 
     /**
@@ -68,7 +68,7 @@ class Twitter extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->apiDomain.'/account/verify_credentials';
+        return $this->apiDomain . '/account/verify_credentials';
     }
 
     /**
@@ -87,7 +87,6 @@ class Twitter extends AbstractProvider
     /**
      * Check a provider response for errors.
      *
-     * @throws IdentityProviderException
      * @param  ResponseInterface $response
      * @param  string $data Parsed response data
      * @return void
@@ -102,7 +101,7 @@ class Twitter extends AbstractProvider
      *
      * @param array $response
      * @param AccessToken $token
-     * @return League\OAuth2\Client\Provider\ResourceOwnerInterface
+     * @return ResourceOwnerInterface
      */
     protected function createResourceOwner(array $response, AccessToken $token)
     {

@@ -60,7 +60,7 @@ class TwitterResourceOwner extends GenericResourceOwner
      */
     public function getUrl()
     {
-        return trim($this->domain.'/'.$this->getNickname()) ?: null;
+        return trim($this->domain . '/' . $this->getNickname()) ?: null;
     }
 
     /**
@@ -68,7 +68,7 @@ class TwitterResourceOwner extends GenericResourceOwner
      *
      * @param  string $domain
      *
-     * @return ResourceOwner
+     * @return ResourceOwnerInterface
      */
     public function setDomain($domain)
     {
