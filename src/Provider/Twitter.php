@@ -2,6 +2,7 @@
 
 namespace League\OAuth2\Client\Provider;
 
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
 
@@ -34,7 +35,7 @@ class Twitter extends AbstractProvider
      */
     protected function getAuthorizationHeaders($token = null)
     {
-        return ['Authorization' => 'Token ' . $token];
+        return ['Authorization' => 'Bearer ' . $token];
     }
 
     /**
@@ -68,7 +69,7 @@ class Twitter extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->apiDomain . '/account/verify_credentials';
+        return $this->apiDomain . '/1.1/account/verify_credentials.json?include_email=1';
     }
 
     /**
@@ -93,7 +94,9 @@ class Twitter extends AbstractProvider
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
-
+        if ($response->getStatusCode() !== 200) {
+            throw new IdentityProviderException($response->getReasonPhrase(), $response->getStatusCode(), $response);
+        }
     }
 
     /**
